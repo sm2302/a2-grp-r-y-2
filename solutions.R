@@ -15,6 +15,23 @@ eqtri_df <- tibble(
   yend = c(-0.5, -0.5, 1)
 )
 
+# Setting parameters
+xx0 = 0; yy0 = 0; # center of circle
+r = 1; # radius of circle
+nLines = 100; # number of lines
+
+
+# Method A
+
+
+
+# Method B
+
+
+
+# Method C 
+
+
 # Plot
 p <- ggplot() +
   ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1), col = "gray50") +
