@@ -17,41 +17,47 @@ eqtri_df <- tibble(
 
 # Setting parameters
 nLines = 1000; # number of lines
-r = 1
-
+r = 1 # radius of circle
+l = sqrt(3) # length of the side of triangle
 
 
 # Method A
 theta1 <- runif(nLines, 0, 2*pi)
 theta2 <- runif(nLines, 0, 2*pi) 
-x1 <- r*cos(theta1)
+# endpoints of chords whithin the circle
+x1 <- r*cos(theta1) 
 y1 <- r*sin(theta1) 
 x2 <- r*cos(theta2)
 y2 <- r*sin(theta2)
+
 chordA <- sqrt(((x2)-(x1))^2 + ((y2)-(y1))^2)
-sum(chordA > sqrt(3))
-pA <- sum(chordA > sqrt(3)) / nLines #probability of Method A
+sum(chordA > l) # total number of chords longer than the length(l)
+pA <- sum(chordA > l) / nLines # probability of Method A
 
 # Method B
 theta3 <- runif(nLines, 0, 2*pi)
+# endpoints of chords within the circle
 x3 <- r*cos(theta3)
 y3 <- r*sin(theta3) 
+
 distance <- runif(nLines, 0, r)
 chordB <- 2 * sqrt((1^2) - (distance)^2)
-sum(chordB > sqrt(3))
-pB <- sum(chordB > sqrt(3)) / nLines #probability of Method B
+sum(chordB > l) # total number of chords longer than the length(l)
+pB <- sum(chordB > l) / nLines # probability of Method B
 
 # Method C 
 theta4 <- runif(nLines, 0, 2*pi)
+# endpoints of chords within the circle
 x4 <- r*cos(theta4)
 y4 <- r*sin(theta4)
 x5 <- x4*cos(theta4) + y4*sin(theta4)
 y5 <- x4*sin(theta4) - y4*cos(theta4)
 x6 <- x4*cos(theta4) - y4*sin(theta4)
 y6 <- x4*sin(theta4) + y4*cos(theta4)
+
 chordC <- sqrt(((x6)-(x5))^2 + ((y6)-(y5))^2)
-sum(chordC > sqrt(3))
-pC <- sum(chordC > sqrt(3)) / nLines #probability of Method C
+sum(chordC > l) # total number of chords longer than the length(l)
+pC <- sum(chordC > l) / nLines # probability of Method C
 
 # Plot
 p <- ggplot() +
