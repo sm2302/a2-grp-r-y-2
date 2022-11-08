@@ -26,6 +26,7 @@ y2 <- r*sin(theta2)
 chordA <- sqrt(((x2)-(x1))^2 + ((y2)-(y1))^2)
 sA <- sum(chordA > l) # Total number of chords longer than the length(l)
 pA <- sA/nLines # Probability of Method A
+print(pA)
 
 
 
@@ -39,7 +40,7 @@ distance <- runif(nLines, 0, r)
 chordB <- 2 * sqrt((1^2) - (distance)^2)
 sB <- sum(chordB > l) # Total number of chords longer than the length(l)
 pB <- sB/nLines # Probability of Method B
-
+print (pB)
 
 
 # Method C 
@@ -55,7 +56,7 @@ y6 <- x4*sin(theta4) + y4*cos(theta4)
 chordC <- sqrt(((x6)-(x5))^2 + ((y6)-(y5))^2)
 sC <- sum(chordC > l) # Total number of chords longer than the length(l)
 pC <- sC/nLines # Probability of Method C
-
+print(pC)
 
 
 
@@ -72,10 +73,22 @@ eqtri_df <- tibble(
   yend = c(-0.5, -0.5, 1)
 )
 
+rdmchr_df <- tibble(
+  x    = x1,
+  y    = y1,
+  xend = x2,
+  yend = y2
+)
+
 # Plot
+# Method A
 p <- ggplot() +
-  ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1), col = "gray50") +
+  ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1)) +
   geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_segment(data = rdmchr_df, aes(x = x, y = y, xend = xend, yend = yend),
+               col = "blue") +
   coord_equal()
 
-ggsave(p, file = "plot.png", height = 5, width = 7)
+ggsave(p, file = "plotA.png", height = 5, width = 7)
+
+
