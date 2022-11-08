@@ -16,13 +16,19 @@ eqtri_df <- tibble(
 )
 
 # Setting parameters
-nLines = 100; # number of lines
-
-
+nLines = 1000; # number of lines
 
 
 
 # Method A
+x1 <- runif(nLines,-1,1)
+y1 <- sample(c(-1,1), size = 1) * sqrt(1 - ((x1)^2))
+x2 <- runif(nLines,-1,1)
+y2 <- sample(c(-1,1), size = 1) * sqrt(1 - ((x2)^2))
+chordA <- sqrt(((x2)-(x1))^2 + ((y2)-(y1))^2)
+sum(chordA > sqrt(3))
+
+
 
 
 # Plot
@@ -39,26 +45,7 @@ ggsave(p, file = "plot.png", height = 5, width = 7)
 
 # Method B
 
-sLines = 0
-lLines = 0
-for (n in nLines){
-  x1 = 0
-  x2 = runif(nLines, min = -1, max = 1)
-  y1 = 0
-  y2 = runif(c(nLines, min = -1, max = 1))
-  b1 <- ((y2-y1)^2) + ((x2-x1)^2)
-  b2 <- sqrt(b1)
-}
-if b2 > sqrt(3) {
-  lLines = lLines + 1
-  }
-  elseif b2 < sqrt(3) {
-    sLines = sLines + 1
-  }
-}
 
-p <- sLines/(sLines + lLines)
-print(p)
 
 # Plot
 p <- ggplot() +
@@ -73,6 +60,7 @@ ggsave(p, file = "plot.png", height = 5, width = 7)
 
 
 # Method C 
+
 
 
 # Plot
