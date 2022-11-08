@@ -42,8 +42,15 @@ sum(chordB > sqrt(3))
 
 
 # Method C 
-
-
+theta4 <- runif(nLines, 0, 2*pi)
+x4 <- r*cos(theta4)
+y4 <- r*sin(theta4)
+x5 <- x4*cos(theta4) + y4*sin(theta4)
+y5 <- x4*sin(theta4) - y4*cos(theta4)
+x6 <- x4*cos(theta4) - y4*sin(theta4)
+y6 <- x4*sin(theta4) + y4*cos(theta4)
+chordC <- sqrt(((x6)-(x5))^2 + ((y6)-(y5))^2)
+sum(chordC > sqrt(3))
 
 # Plot
 p <- ggplot() +
