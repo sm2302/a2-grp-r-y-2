@@ -16,7 +16,7 @@ eqtri_df <- tibble(
 )
 
 # Setting parameters
-nLines = 10000; # number of lines
+nLines = 1000; # number of lines
 r = 1
 
 
@@ -32,32 +32,13 @@ chordA <- sqrt(((x2)-(x1))^2 + ((y2)-(y1))^2)
 sum(chordA > sqrt(3))
 
 
-# Plot
-p <- ggplot() +
-  ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1), col = "gray50") +
-  geom_segment(data = eqtri_df, aes(x1 = x1, y1 = y1, x2 = x2, y2 = y2)) +
-  coord_equal()
-
-ggsave(p, file = "plot.png", height = 5, width = 7)
-
-
-
-
-
 # Method B
-
-
-
-# Plot
-p <- ggplot() +
-  ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1), col = "gray50") +
-  geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend)) +
-  coord_equal()
-
-ggsave(p, file = "plot.png", height = 5, width = 7)
-
-
-
+theta3 <- runif(nLines, 0, 2*pi)
+x3 <- r*cos(theta3)
+y3 <- r*sin(theta3) 
+distance <- runif(nLines, 0, r)
+chordB <- 2 * sqrt((1^2) - (distance)^2)
+sum(chordB > sqrt(3))
 
 
 # Method C 
