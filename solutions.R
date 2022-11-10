@@ -5,6 +5,10 @@ library(tidyverse)
 library(ggforce)
 theme_set(theme_void())
 
+
+
+
+
 # Bertrand’s Paradox Probability Part
 
 # Setting parameters
@@ -29,6 +33,7 @@ chordA <- sqrt(((x2)-(x1))^2 + ((y2)-(y1))^2)
 sA <- sum(chordA > l) # Total number of chords longer than the length(l)
 pA <- sA/nLines # Probability of Method A
 print(pA)
+# Answer for Probability of Method A is roughly around 1/3
 
 
 
@@ -43,6 +48,7 @@ chordB <- 2 * sqrt((1^2) - (distance)^2)
 sB <- sum(chordB > l) # Total number of chords longer than the length(l)
 pB <- sB/nLines # Probability of Method B
 print (pB)
+# Answer for Probability of Method B is roughly around 1/2
 
 
 
@@ -60,14 +66,13 @@ chordC <- sqrt(((x6)-(x5))^2 + ((y6)-(y5))^2)
 sC <- sum(chordC > l) # Total number of chords longer than the length(l)
 pC <- sC/nLines # Probability of Method C
 print(pC)
+# Answer for Probability of Method C is roughly around 1/4
 
 
 
 
 
 # Bertrand’s Paradox Plotting Part
-
-# Draw a random chord in a unit circle centred at origin -----------------------
 
 # Coordinates of equilateral triangle
 eqtri_df <- tibble(
@@ -76,8 +81,6 @@ eqtri_df <- tibble(
   xend = c(sqrt(3) / 2, -sqrt(3) / 2, 0),
   yend = c(-0.5, -0.5, 1)
 )
-
-
 
 rdmchr_df <- tibble(
   x    = x1,
@@ -107,4 +110,17 @@ p <- ggplot() +
   coord_equal()
 
 ggsave(p, file = "plotB.png", height = 5, width = 7)
+
+
+
+# Method C
+p <- ggplot() +
+  ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r), col = 'blue', size = 0.5) +
+  geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
+  geom_segment(data = rdmchr_df, aes(x = x5, y = y5, xend = x6, yend = y6), size = 0.3) +
+  coord_equal()
+
+ggsave(p, file = "plotC.png", height = 5, width = 7)
+
+
 
