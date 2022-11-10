@@ -23,7 +23,7 @@ l = sqrt(3) # Length of the side of an equilateral triangle
 # Method A
 theta1 <- runif(nLines, 0, 2*pi)
 theta2 <- runif(nLines, 0, 2*pi) 
-# Endpoints of chords within the circle
+# Endpoints of chords on the circumference of the circle
 x1 <- r*cos(theta1) 
 y1 <- r*sin(theta1) 
 x2 <- r*cos(theta2)
@@ -39,12 +39,12 @@ print(pA)
 
 # Method B
 theta3 <- runif(nLines, 0, 2*pi)
-# Endpoints of chords within the circle
+# Endpoints of radius on the circumference of the circle
 x3 <- r*cos(theta3)
 y3 <- r*sin(theta3) 
 
 distance <- runif(nLines, 0, r)
-chordB <- 2 * sqrt((1^2) - (distance)^2)
+chordB <- 2 * sqrt((r)^2 - (distance)^2)
 sB <- sum(chordB > l) # Total number of chords longer than the length(l)
 pB <- sB/nLines # Probability of Method B
 print (pB)
@@ -53,16 +53,19 @@ print (pB)
 
 
 # Method C 
+x4 <- runif(nLines, -1, 1)
+y4 <- sqrt((r)^2 - (x4)^2)
 theta4 <- runif(nLines, 0, 2*pi)
-# Endpoints of chords within the circle
-x4 <- r*cos(theta4)
-y4 <- r*sin(theta4)
-x5 <- x4*cos(theta4) + y4*sin(theta4)
-y5 <- x4*sin(theta4) - y4*cos(theta4)
-x6 <- x4*cos(theta4) - y4*sin(theta4)
-y6 <- x4*sin(theta4) + y4*cos(theta4)
 
-chordC <- sqrt(((x6)-(x5))^2 + ((y6)-(y5))^2)
+# Endpoints of chords within the circle
+x5 <- r*cos(theta4)
+y5 <- r*sin(theta4)
+x6 <- x4*cos(theta4) + y4*sin(theta4)
+y6 <- x4*sin(theta4) - y4*cos(theta4)
+x7 <- x4*cos(theta4) - y4*sin(theta4)
+y7 <- x4*sin(theta4) + y4*cos(theta4)
+
+chordC <- sqrt(((x7)-(x6))^2 + ((y7)-(y6))^2)
 sC <- sum(chordC > l) # Total number of chords longer than the length(l)
 pC <- sC/nLines # Probability of Method C
 print(pC)
@@ -117,10 +120,9 @@ ggsave(p, file = "plotB.png", height = 5, width = 7)
 p <- ggplot() +
   ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r), col = 'blue', size = 0.5) +
   geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
-  geom_segment(data = rdmchr_df, aes(x = x5, y = y5, xend = x6, yend = y6), size = 0.3) +
+  geom_segment(data = rdmchr_df, aes(x = x6, y = y6, xend = x7, yend = y7), size = 0.3) +
   coord_equal()
 
 ggsave(p, file = "plotC.png", height = 5, width = 7)
-
 
 
