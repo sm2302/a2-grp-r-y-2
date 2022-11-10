@@ -9,6 +9,8 @@ theme_set(theme_void())
 
 # Setting parameters
 nLines = 100; # Number of lines
+x0 = 0 # x-coordinate of the center of the circle
+y0 = 0 # y-coordinate of the center of the circle
 r = 1 # Radius of circle
 l = sqrt(3) # Length of the side of an equilateral triangle
 
@@ -43,6 +45,7 @@ pB <- sB/nLines # Probability of Method B
 print (pB)
 
 
+
 # Method C 
 theta4 <- runif(nLines, 0, 2*pi)
 # Endpoints of chords within the circle
@@ -61,6 +64,7 @@ print(pC)
 
 
 
+
 # Bertrand’s Paradox Plotting Part
 
 # Draw a random chord in a unit circle centred at origin -----------------------
@@ -73,6 +77,8 @@ eqtri_df <- tibble(
   yend = c(-0.5, -0.5, 1)
 )
 
+
+
 rdmchr_df <- tibble(
   x    = x1,
   y    = y1,
@@ -80,15 +86,25 @@ rdmchr_df <- tibble(
   yend = y2
 )
 
-# Plot
+
+
 # Method A
 p <- ggplot() +
-  ggforce::geom_circle(aes(x0 = 0, y0 = 0, r = 1)) +
-  geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_segment(data = rdmchr_df, aes(x = x, y = y, xend = xend, yend = yend),
-               col = "blue") +
+  ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r), col = 'blue', size = 0.5) +
+  geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
+  geom_segment(data = rdmchr_df, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
   coord_equal()
 
 ggsave(p, file = "plotA.png", height = 5, width = 7)
 
+
+
+# Method B
+p <- ggplot() +
+  ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r), col = 'blue', size = 0.5) +
+  geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
+  geom_segment(data = rdmchr_df, aes(x = x0, y = y0, xend = x3, yend = y3), size = 0.3) +
+  coord_equal()
+
+ggsave(p, file = "plotB.png", height = 5, width = 7)
 
