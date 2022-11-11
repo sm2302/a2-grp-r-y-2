@@ -53,12 +53,12 @@ print (pB)
 
 
 # Method C 
-r2 <- r0 * sqrt(runif(nLines))
+r1 <- r0 * sqrt(runif(nLines))
 theta4 <- runif(nLines, 0, 2*pi)
 
 # Midpoints within the circle
-x4 <- r2*cos(theta4)
-y4 <- r2*sin(theta4)
+x4 <- r1*cos(theta4)
+y4 <- r1*sin(theta4)
 
 distance2 <- sqrt((x4 - x0)^2 + (y4 - y0)^2)
 chordC <- 2 * sqrt((r0)^2 - (distance2)^2)
@@ -102,27 +102,40 @@ ggsave(p, file = "plotA.png", height = 5, width = 7)
 
 
 # Method B
-x5 <- (distance1/r0) * (x3-x0) 
-y5 <- (distance1/r0) * (y3-y0)
+# Midpoint of the chord
+x5 <- (distance1/r0) * (x3 - x0) 
+y5 <- (distance1/r0) * (y3 - y0)
+
+# Codes to find endpoints of chords
+theta5 <- atan2(y5, x5)
+x6 <- cos(-theta5) * x5 - sin(-theta5) * y5
+y6 <- sin(-theta5) * x5 - cos(-theta5) * y5
+y7 <- sqrt(r0^2 - x6^2)
+y8 <- -sqrt(r0^2 - x6^2)
+x9 <- cos(theta5) * x6 - sin(theta5) * y7
+y9 <- sin(theta5) * x6 + cos(theta5) * y7
+x10 <- cos(theta5) * x6 - sin(theta5) * y8
+y10 <- sin(theta5) * x6 + cos(theta5) * y8
 # Endpoints of chord on the circumference of the circle
-x6 <- 
-y6 <- 
-x7 <- ((2 * (x5)) - x6)
-y7 <- ((2 * (y5)) - y6)
+x9 <- x9 + x0
+y9 <- y9 + y0
+x10 <- x10 + x0
+y10 <- y10 + y0
+
 
 rdmchr_df2 <- tibble(
-  x    = x6,
-  y    = y6,
-  xend = x7,
-  yend = y7
+  x    = x9,
+  y    = y9,
+  xend = x10,
+  yend = y10
 )
 
 p <- ggplot() +
   ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r0), col = 'blue', size = 0.5) +
   geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
-  geom_segment(data = rdmchr_df, aes(x = x0, y = y0, xend = x3, yend = y3), col = 'gray', size = 0.3) +
+  geom_segment(aes(x = x0, y = y0, xend = x3, yend = y3), col = 'gray', size = 0.3) +
   geom_point(aes(x5, y5), col = 'gray') +
-#  geom_segment(data = rdmchr_df2, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
+  geom_segment(data = rdmchr_df2, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
   coord_equal()
 
 ggsave(p, file = "plotB.png", height = 5, width = 7)
@@ -130,25 +143,34 @@ ggsave(p, file = "plotB.png", height = 5, width = 7)
 
 
 # Method C
+# Codes to find endpoints of chords
+theta6 <- atan2(y4, x4)
+x11 <- cos(-theta6) * x4 - sin(-theta6) * y4
+y11 <- sin(-theta6) * x4 - cos(-theta6) * y4
+y12 <- sqrt(r0^2 - x11^2)
+y13 <- -sqrt(r0^2 - x11^2)
+x14 <- cos(theta6) * x11 - sin(theta6) * y12
+y14 <- sin(theta6) * x11 + cos(theta6) * y12
+x15 <- cos(theta6) * x11 - sin(theta6) * y13
+y15 <- sin(theta6) * x11 + cos(theta6) * y13
 # Endpoints of chord on the circumference of the circle
-x8 <- 
-y8 <- 
-x9 <- ((2 * (x4)) - (x8))
-y9 <- ((2 * (y4)) - (y8))
+x14 <- x14 + x0
+y14 <- y14 + y0
+x15 <- x15 + x0
+y15 <- y15 + y0
 
 rdmchr_df3 <- tibble(
-  x    = x8,
-  y    = y8,
-  xend = x9,
-  yend = y9
+  x    = x14,
+  y    = y14,
+  xend = x15,
+  yend = y15
 )
 
 p <- ggplot() +
   ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r0), col = 'blue', size = 0.5) +
   geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
   geom_point(aes(x4, y4), col = 'gray') +
-#  geom_segment(data = rdmchr_df3, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
+  geom_segment(data = rdmchr_df3, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
   coord_equal()
 
 ggsave(p, file = "plotC.png", height = 5, width = 7)
-
