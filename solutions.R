@@ -12,7 +12,7 @@ theme_set(theme_void())
 # Bertrand’s Paradox Probability Part
 
 # Setting parameters
-nLines = 100; # Number of lines
+nLines = 10000; # Number of lines
 x0 = 0 # x-coordinate of the center of the circle
 y0 = 0 # y-coordinate of the center of the circle
 r0 = 1 # Radius of circle
@@ -43,10 +43,10 @@ theta3 <- runif(nLines, 0, 2*pi)
 x3 <- r0*cos(theta3)
 y3 <- r0*sin(theta3) 
 # Endpoints of chord on the circumference of the circle
-x4 <- 
-y4 <- 
-x5 <- ((2 * (x3)) - (x4))
-y5 <- ((2 * (y3)) - (y4))
+#x4 <- 
+#y4 <- 
+#x5 <- ((2 * (x3)) - (x4))
+#y5 <- ((2 * (y3)) - (y4))
 
 distance1 <- runif(nLines, 0, r0)
 chordB <- 2 * sqrt((r0)^2 - (distance1)^2)
@@ -65,10 +65,10 @@ theta4 <- runif(nLines, 0, 2*pi)
 x6 <- r2*cos(theta4)
 y6 <- r2*sin(theta4)
 # Endpoints of chord on the circumference of the circle
-x7 <-  
-y7 <-
-x8 <-
-y8 <-
+#x7 <- 
+#y7 <- 
+#x8 <- 
+#y8 <- 
 
 distance2 <- sqrt((x6 - x0)^2 + (y6 - y0)^2)
 chordC <- 2 * sqrt((r0)^2 - (distance2)^2)
