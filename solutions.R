@@ -1,5 +1,3 @@
-# Instruction to students: You may clear the code in this file and replace it
-# with your own.
 
 library(tidyverse)
 library(ggforce)
@@ -12,7 +10,7 @@ theme_set(theme_void())
 # Bertrand’s Paradox Probability Part
 
 # Setting parameters
-nLines = 100; # Number of lines
+nLines = 10000; # Number of lines
 x0 = 0 # x-coordinate of the center of the circle
 y0 = 0 # y-coordinate of the center of the circle
 r0 = 1 # Radius of circle
@@ -179,3 +177,7 @@ ggsave(p, file = "plotC.png", height = 5, width = 7)
 
 
 
+# Reference
+# https://en.wikipedia.org/wiki/Bertrand_paradox_(probability)
+# https://stackoverflow.com/questions/48358792/generating-random-points-on-the-circumference-of-a-circle-python
+# http://www.anderswallin.net/2009/05/uniform-random-points-in-a-circle-using-polar-coordinates/
