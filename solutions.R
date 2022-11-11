@@ -95,6 +95,8 @@ p <- ggplot() +
   ggforce::geom_circle(aes(x0 = x0, y0 = y0, r = r0), col = 'blue', size = 0.5) +
   geom_segment(data = eqtri_df, aes(x = x, y = y, xend = xend, yend = yend), col = 'red', size = 0.5) +
   geom_segment(data = rdmchr_df1, aes(x = x, y = y, xend = xend, yend = yend), size = 0.3) +
+  geom_point(aes(x1, y1), col = 'gray') +
+  geom_point(aes(x2, y2), col = 'gray') +
   coord_equal()
 
 ggsave(p, file = "plotA.png", height = 5, width = 7)
@@ -174,3 +176,6 @@ p <- ggplot() +
   coord_equal()
 
 ggsave(p, file = "plotC.png", height = 5, width = 7)
+
+
+
