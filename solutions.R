@@ -53,22 +53,21 @@ print (pB)
 
 
 # Method C 
-x4 <- runif(nLines, -1, 1)
-y4 <- sqrt((r)^2 - (x4)^2)
+r2 <- r * sqrt(runif(nLines))
 theta4 <- runif(nLines, 0, 2*pi)
 
 # Endpoints of chords within the circle
-x5 <- r*cos(theta4)
-y5 <- r*sin(theta4)
-x6 <- x4*cos(theta4) + y4*sin(theta4)
-y6 <- x4*sin(theta4) - y4*cos(theta4)
-x7 <- x4*cos(theta4) - y4*sin(theta4)
-y7 <- x4*sin(theta4) + y4*cos(theta4)
+x5 <- r2*cos(theta4)
+y5 <- r2*sin(theta4)
+#x6 <- x4*cos(theta4) + y4*sin(theta4)
+#y6 <- x4*sin(theta4) - y4*cos(theta4)
+#x7 <- x4*cos(theta4) - y4*sin(theta4)
+#y7 <- x4*sin(theta4) + y4*cos(theta4)
 
-chordC <- sqrt(((x7)-(x6))^2 + ((y7)-(y6))^2)
-sC <- sum(chordC > l) # Total number of chords longer than the length(l)
-pC <- sC/nLines # Probability of Method C
-print(pC)
+#chordC <- sqrt(((x7)-(x6))^2 + ((y7)-(y6))^2)
+#sC <- sum(chordC > l) # Total number of chords longer than the length(l)
+#pC <- sC/nLines # Probability of Method C
+#print(pC)
 # Answer for Probability of Method C is roughly around 1/4
 
 
